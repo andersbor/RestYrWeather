@@ -9,6 +9,7 @@ namespace RESTyr
 {
     class Program
     {
+        // http://fil.nrk.no/yr/viktigestader/verda.txt
         private const string Uri = "http://www.yr.no/sted/Danmark/Sjælland/Roskilde/varsel.xml";
 
         static void Main()
