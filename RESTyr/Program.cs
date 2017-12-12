@@ -20,7 +20,7 @@ namespace RESTyr
                 
                 if (response.IsSuccessStatusCode)
                 {
-                    string xmlString = GetProductAsync(client, Uri).Result;
+                    string xmlString = CallRestServiceAsync(client, Uri).Result;
                     Console.WriteLine(xmlString);
                     IEnumerable<Weather> weather = GetWeatherFromXml(xmlString);
                     Console.WriteLine(string.Join("\n", weather));
@@ -32,7 +32,7 @@ namespace RESTyr
             }
         }
 
-        private static async Task<string> GetProductAsync(HttpClient client, string path)
+        private static async Task<string> CallRestServiceAsync(HttpClient client, string path)
         {
             HttpResponseMessage response = await client.GetAsync(path);
             if (response.IsSuccessStatusCode)
@@ -52,8 +52,10 @@ namespace RESTyr
             for (int i = 0; i < namesXmlList.Count; i++)
             {
                 XmlNode namesNode = namesXmlList[i];
-                string from = namesNode.Attributes["from"].Value;
-                string to = namesNode.Attributes["to"].Value;
+                string fromStr = namesNode.Attributes["from"].Value;
+                DateTime from = DateTime.Parse(fromStr);
+                string toStr = namesNode.Attributes["to"].Value;
+                DateTime to = DateTime.Parse(toStr);
 
                 XmlNode temperatureNode = namesNode.SelectSingleNode("temperature");
                 string temperatureString = temperatureNode.Attributes["value"].Value;

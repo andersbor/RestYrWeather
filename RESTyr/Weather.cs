@@ -1,9 +1,11 @@
-﻿namespace RESTyr
+﻿using System;
+
+namespace RESTyr
 {
     public class Weather
     {
-        public string From { get; set; }
-        public string To { get; set; }
+        public DateTime From { get; set; }
+        public DateTime To { get; set; }
         public int Temperature { get; set; }
         public double Precipitation { get; set; }
         public double Pressure { get; set; }
